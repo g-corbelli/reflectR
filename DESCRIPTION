@@ -1,0 +1,16 @@
+Package: reflectR
+Type: Package
+Title: reflectR: automatic scoring of the Cognitive Reflection Test-2
+Version: 0.1.0
+Imports:
+    stringr
+Author: Giuseppe Corbelli
+Maintainer: Giuseppe Corbelli <giuseppe.corbelli@uninettunouniversity.net>
+Description: The reflectR package provides a tool for researchers and psychologists to automatically code open-ended responses to the Cognitive Reflection Test 2 (CRT-2), a widely used tool in cognitive science and psychology for assessing an individual's propensity to override an incorrect gut response and engage in further reflection to find a correct answer (Thomson & Oppenheimer, 2016).    This package facilitates the standardization of CRT-2 response analysis across large datasets in cognitive psychology, decision-making, and related fields. By automating the coding process, it not only reduces manual effort but also aims to reduce the variability introduced by subjective interpretation of open-ended responses, contributing to a more consistent and reliable analysis. 
+    Note: While reflectR draws inspiration from the principles and scientific literature underlying the CRT-2, it has been independently developed and does not hold any affiliation with the original authors of the CRT-2.
+URL: https://github.com/g-corbelli/reflectR
+BugReports: https://github.com/g-corbelli/reflectR/issues
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
