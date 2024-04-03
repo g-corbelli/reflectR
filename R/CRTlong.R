@@ -31,7 +31,9 @@ CRTlong <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\b10\\b|\\bten\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -48,7 +50,9 @@ CRTlong <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\bhundred\\b|\\b100\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -65,7 +69,9 @@ CRTlong <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\btwentyfour\\b|\\b24\\b|\\btwenty-four\\b|\\btwenty four\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -82,7 +88,9 @@ CRTlong <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\bsix\\b|\\b6\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -99,7 +107,9 @@ CRTlong <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\bthirty\\b|\\b30\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -116,7 +126,9 @@ CRTlong <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\btwenty\\b|\\b20\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1

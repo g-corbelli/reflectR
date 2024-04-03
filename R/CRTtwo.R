@@ -28,7 +28,9 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
     regex.impulsivo <- "\\bfirst\\b|\\b1\\b|\\bone\\b|\\btop\\b|\\bwin\\b|\\bbest\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -40,16 +42,14 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   }
 
   CRTcoder2 <- function(risposta) {
-    # Convert to lowercase
     risposta <- tolower(risposta)
-    # Regex patterns
     regex.corretto <- "\\beight\\b|\\b8(\\.0+)?\\b"
     regex.impulsivo <- "\\bseven\\b|\\b7(\\.0+)?\\b"
-    # Initialize the result vector
     result <- integer(length(risposta))
-    # Apply the coding logic to each response
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -61,16 +61,14 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   }
 
   CRTcoder3 <- function(risposta) {
-    # Convert to lowercase
     risposta <- tolower(risposta)
-    # Regex patterns for the intuitive-incorrect and correct responses
     regex.corretto <- "\\bjune\\b"
     regex.impulsivo <- "\\bemily\\b"
-    # Initialize the result vector
     result <- integer(length(risposta))
-    # Apply the coding logic to each response
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
@@ -82,16 +80,14 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   }
 
   CRTcoder4 <- function(risposta) {
-    # Convert to lowercase
     risposta <- tolower(risposta)
-    # Regex patterns for intuitive-incorrect answers and the correct answer
     regex.corretto <- "\\b0\\b|\\bzero\\b|\\bnone\\b|\\bempty\\b|\\bnothing\\b"
     regex.impulsivo <- "(?<!\\d)(?!0+(?:\\.0+)?\\b)(\\d+|zero)(\\.\\d+)?(\\s*(cm3|m3|metri cubi|mq|cm|metri|m|cubi))?|\\d+\\^\\d+|\\,\\d+|\\.\\d+"
-    # Initialize the result vector
     result <- integer(length(risposta))
-    # Apply the coding logic to each response
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.impulsivo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
       } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1

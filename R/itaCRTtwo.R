@@ -24,13 +24,15 @@ itaCRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder1 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.primoposto <- "\\bprim[ao]?\\b|\\b1\\b|\\buno\\b|\\b1\\b|\\bcima\\b|\\bfronte\\b|\\bvinc\\b|\\bdavanti\\b|\\bno\\.? 1\\b|\\bin testa\\b|\\bprima posizione\\b"
-    regex.secondoposto <- "\\bsecondo\\b|\\b2\\b|\\bdue\\b|\\bal secondo posto\\b|\\bsecond\\b|\\bseconda\\b"
+    regex.impulsivo <- "\\bprim[ao]?\\b|\\b1\\b|\\buno\\b|\\b1\\b|\\bcima\\b|\\bfronte\\b|\\bvinc\\b|\\bdavanti\\b|\\bno\\.? 1\\b|\\bin testa\\b|\\bprima posizione\\b"
+    regex.corretto <- "\\bsecondo\\b|\\b2\\b|\\bdue\\b|\\bal secondo posto\\b|\\bsecond\\b|\\bseconda\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.primoposto)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
-      } else if (stringr::str_detect(risposta[i], regex.secondoposto)) {
+      } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
       } else {
         result[i] <- 3
@@ -40,18 +42,16 @@ itaCRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   }
 
   CRTcoder2 <- function(risposta) {
-    # Convert to lowercase
     risposta <- tolower(risposta)
-    # Regex patterns
-    regex.sette <- "\\bsette\\b|\\b7(\\.0+)?\\b"
-    regex.otto <- "\\botto\\b|\\b8(\\.0+)?\\b"
-    # Initialize the result vector
+    regex.impulsivo <- "\\bsette\\b|\\b7(\\.0+)?\\b"
+    regex.corretto <- "\\botto\\b|\\b8(\\.0+)?\\b"
     result <- integer(length(risposta))
-    # Apply the coding logic to each response
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.sette)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
-      } else if (stringr::str_detect(risposta[i], regex.otto)) {
+      } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
       } else {
         result[i] <- 3
@@ -61,18 +61,16 @@ itaCRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   }
 
   CRTcoder3 <- function(risposta) {
-    # Convert to lowercase
     risposta <- tolower(risposta)
-    # Regex patterns for the intuitive-incorrect and correct responses
-    regex.primo <- "\\bprim[ao]?\\b"
-    regex.carlo <- "\\bcarlo\\b"
-    # Initialize the result vector
+    regex.impulsivo <- "\\bprim[ao]?\\b"
+    regex.corretto <- "\\bcarlo\\b"
     result <- integer(length(risposta))
-    # Apply the coding logic to each response
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.primo)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
-      } else if (stringr::str_detect(risposta[i], regex.carlo)) {
+      } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
       } else {
         result[i] <- 3
@@ -82,18 +80,16 @@ itaCRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   }
 
   CRTcoder4 <- function(risposta) {
-    # Convert to lowercase
     risposta <- tolower(risposta)
-    # Regex patterns for intuitive-incorrect answers and the correct answer
-    regex.calcoli <- "(?<!\\d)(?!0+(?:\\.0+)?\\b)(\\d+|zero)(\\.\\d+)?(\\s*(cm3|m3|metri cubi|mq|cm|metri|m|cubi))?|\\d+\\^\\d+|\\,\\d+|\\.\\d+"
-    regex.zero <- "\\b0\\b|\\bzero\\b|\\bnulla\\b"
-    # Initialize the result vector
+    regex.impulsivo <- "(?<!\\d)(?!0+(?:\\.0+)?\\b)(\\d+|zero)(\\.\\d+)?(\\s*(cm3|m3|metri cubi|mq|cm|metri|m|cubi))?|\\d+\\^\\d+|\\,\\d+|\\.\\d+"
+    regex.corretto <- "\\b0\\b|\\bzero\\b|\\bnulla\\b"
     result <- integer(length(risposta))
-    # Apply the coding logic to each response
     for (i in seq_along(risposta)) {
-      if (stringr::str_detect(risposta[i], regex.calcoli)) {
+      if (is.na(risposta[i])) {
+        result[i] <- 3
+      } else if (stringr::str_detect(risposta[i], regex.impulsivo)) {
         result[i] <- 2
-      } else if (stringr::str_detect(risposta[i], regex.zero)) {
+      } else if (stringr::str_detect(risposta[i], regex.corretto)) {
         result[i] <- 1
       } else {
         result[i] <- 3
