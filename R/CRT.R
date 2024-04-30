@@ -1,19 +1,30 @@
-#' Automatic coding for Cognitive Reflection Test open-ended responses
+#' Automatic coding for Cognitive Reflection Test (Frederick, 2005) open-ended responses
 #'
 #' Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
+#'
+#' @importFrom stringr str_detect
 #'
 #' @param item1 Vector of responses to the first CRT question, or NULL if not provided.
 #' @param item2 Vector of responses to the second CRT question, or NULL if not provided.
 #' @param item3 Vector of responses to the third CRT question, or NULL if not provided.
-#' @param codingscheme A character string indicating the desired coding scheme. Options are "categorical" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categorical".
+#' @param codingscheme A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".
+#'
 #' @return A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
+#' @note Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
 #' @examples
-#' reflectR::CRTtwo(
-#'   item1 = c("al primo", "secondo", "1"),
-#'   item2 = c("7", "otto", "sette"),
-#'   item3 = c("primo", "carlo", "si chiama primo"),
-#'   codingscheme = "mean"
-#' )
+#' # Automated scoring for CRT responses using the categorical coding scheme:
+#' reflectR::CRT(
+#' item1 = c("meh", "five", "10", "ten"),
+#' item2 = c("5", "one hundred", "100", "five"),
+#' item3 = c("47", "24", "forty-sevenn", "who knows"),
+#' codingscheme = "categ")
+#'
+#' # Compute the sum score for CRT responses based on binary-coded correctness:
+#' reflectR::CRT(
+#' item1 = c("meh", "five", "10", "ten"),
+#' item2 = c("5", "one hundred", "100", "five"),
+#' item3 = c("47", "24", "forty-sevenn", "booo"),
+#' codingscheme = "sum")$crt_sum
 #' @export
 
 CRT <- function(item1 = NULL, item2 = NULL, item3 = NULL,
@@ -21,8 +32,8 @@ CRT <- function(item1 = NULL, item2 = NULL, item3 = NULL,
 
   CRTcoder1 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfive\\b|\\b5\\b|\\bfiver\\b"
-    regex.impulsivo <- "\\b10\\b|\\bten\\b"
+    regex.corretto <- "five|5"
+    regex.impulsivo <- "ten|10"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -40,8 +51,8 @@ CRT <- function(item1 = NULL, item2 = NULL, item3 = NULL,
 
   CRTcoder2 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfive\\b|\\b5\\b|\\bfiver\\b"
-    regex.impulsivo <- "\\bhundred\\b|\\b100\\b"
+    regex.corretto <- "five|5"
+    regex.impulsivo <- "hundred|\\b100\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -59,8 +70,8 @@ CRT <- function(item1 = NULL, item2 = NULL, item3 = NULL,
 
   CRTcoder3 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfortyseven\\b|\\b47\\b|\\bforty seven\\b|\\bforty-seven\\b"
-    regex.impulsivo <- "\\btwentyfour\\b|\\b24\\b|\\btwenty-four\\b|\\btwenty four\\b"
+    regex.corretto <- "fortyseven|forty-seven|forty seven|47"
+    regex.impulsivo <- "twentyfour|twenty-four|twenty four|24"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {

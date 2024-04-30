@@ -1,6 +1,8 @@
-#' Automatic coding for Cognitive Reflection Test 7-item expanded version, open-ended responses
+#' Automatic coding for Cognitive Reflection Test 7-item expanded version (Toplak et al., 2014) open-ended responses
 #'
 #' Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
+#'
+#' @importFrom stringr str_detect
 #'
 #' @param item1 Vector of responses to the first CRT question, or NULL if not provided.
 #' @param item2 Vector of responses to the second CRT question, or NULL if not provided.
@@ -9,17 +11,32 @@
 #' @param item5 Vector of responses to the fifth CRT question, or NULL if not provided.
 #' @param item6 Vector of responses to the sixth CRT question, or NULL if not provided.
 #' @param item7 Vector of responses to the seventh CRT question, or NULL if not provided.
-#' @param codingscheme A character string indicating the desired coding scheme. Options are "categorical" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categorical".
+#' @param codingscheme A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".
 #'
 #' @return A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
+#' @note Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
 #' @examples
-#' reflectR::CRTtwo(
-#'   item1 = c("al primo", "secondo", "1"),
-#'   item2 = c("7", "otto", "sette"),
-#'   item3 = c("primo", "carlo", "si chiama primo"),
-#'   item4 = c("nulla", "27 metri cubi", "zero"),
-#'   codingscheme = "mean"
-#' )
+#' # Automated scoring for CRT7 responses using the categorical coding scheme:
+#' reflectR::CRT7(
+#' item1 = c("five", "5 cents", "10"),
+#' item2 = c("5", "one hundred", "100"),
+#' item3 = c("47", "24", "forty seven"),
+#' item4 = c("four", "nineeee", "maybe 4?"),
+#' item5 = c("29", "thirty", "30"),
+#' item6 = c("twentyyyy", "ten I think", "dunno"),
+#' item7 = c("your behind", "poorer", "richer"),
+#' codingscheme = "categ")
+#'
+#' # Compute the sum score for CRT7 responses based on binary-coded correctness:
+#' reflectR::CRT7(
+#' item1 = c("five", "5 cents", "10"),
+#' item2 = c("5", "one hundred", "100"),
+#' item3 = c("47", "24", "forty seven"),
+#' item4 = c("four", "nineeee", "maybe 4?"),
+#' item5 = c("29", "thirty", "30"),
+#' item6 = c("twentyyyy", "ten I think", "dunno"),
+#' item7 = c("your behind", "poorer", "richer"),
+#' codingscheme = "sum")$crt_sum
 #' @export
 
 CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
@@ -28,8 +45,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder1 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfive\\b|\\b5\\b|\\bfiver\\b"
-    regex.impulsivo <- "\\b10\\b|\\bten\\b"
+    regex.corretto <- "five|5"
+    regex.impulsivo <- "ten|10"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -47,8 +64,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder2 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfive\\b|\\b5\\b|\\bfiver\\b"
-    regex.impulsivo <- "\\bhundred\\b|\\b100\\b"
+    regex.corretto <- "five|5"
+    regex.impulsivo <- "hundred|\\b100\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -66,8 +83,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder3 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfortyseven\\b|\\b47\\b|\\bforty seven\\b|\\bforty-seven\\b"
-    regex.impulsivo <- "\\btwentyfour\\b|\\b24\\b|\\btwenty-four\\b|\\btwenty four\\b"
+    regex.corretto <- "fortyseven|forty-seven|forty seven|47"
+    regex.impulsivo <- "twentyfour|twenty-four|twenty four|24"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -85,8 +102,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder4 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bfour\\b|\\b4\\b"
-    regex.impulsivo <- "\\bnine\\b|\\b9\\b"
+    regex.corretto <- "four|4"
+    regex.impulsivo <- "nine|9"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -104,8 +121,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder5 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\btwentynine\\b|\\b29\\b|\\btwenty nine\\b|\\btwenty-nine\\b"
-    regex.impulsivo <- "\\bthirty\\b|\\b30\\b"
+    regex.corretto <- "twentynine|twenty-nine|twenty nine|29"
+    regex.impulsivo <- "thirty|30"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -123,8 +140,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder6 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\btwenty\\b|\\b20\\b"
-    regex.impulsivo <- "\\bten\\b|\\b10\\b"
+    regex.corretto <- "twenty|20"
+    regex.impulsivo <- "ten|10"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -142,8 +159,8 @@ CRT7 <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder7 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\blost\\b|\\bbehind\\b|\\bpoorer\\b|\\blosing\\b|\\bseven thousand\\b|\\b7000\\b"
-    regex.impulsivo <- "\\bahead\\b|\\bmore\\b|\\bricher\\b"
+    regex.corretto <- "lost|behind|poor|losing|seven thousand|seven-thousand|seventhousand|7000"
+    regex.impulsivo <- "ahead|more|rich"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {

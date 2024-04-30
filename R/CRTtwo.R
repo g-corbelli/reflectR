@@ -1,22 +1,33 @@
-#' Automatic coding for Cognitive Reflection Test 2 open-ended responses
+#' Automatic coding for Cognitive Reflection Test 2 (Thomson & Oppenheimer, 2016) open-ended responses
 #'
 #' Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
+#'
+#' @importFrom stringr str_detect
 #'
 #' @param item1 Vector of responses to the first CRT question, or NULL if not provided.
 #' @param item2 Vector of responses to the second CRT question, or NULL if not provided.
 #' @param item3 Vector of responses to the third CRT question, or NULL if not provided.
 #' @param item4 Vector of responses to the fourth CRT question, or NULL if not provided.
-#' @param codingscheme A character string indicating the desired coding scheme. Options are "categorical" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categorical".
+#' @param codingscheme A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".
 #'
 #' @return A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
+#' @note Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
 #' @examples
+#' # Automated scoring for CRTtwo responses using the categorical coding scheme:
 #' reflectR::CRTtwo(
-#'   item1 = c("al primo", "secondo", "1"),
-#'   item2 = c("7", "otto", "sette"),
-#'   item3 = c("primo", "carlo", "si chiama primo"),
-#'   item4 = c("nulla", "27 metri cubi", "zero"),
-#'   codingscheme = "mean"
-#' )
+#' item1 = c("first place", "second place", "1", "seconddd", "meh"),
+#' item2 = c("7", "eightt", "seven", NA, "8"),
+#' item3 = c("emily", "i think emily", "JUNEE", "maybe june", "the name is emily"),
+#' item4 = c("nothing", "27 sqmt", "0", "it's empty", "i suck at math"),
+#' codingscheme = "categ")
+#'
+#' # Compute the sum score for CRTtwo responses based on binary-coded correctness:
+#' reflectR::CRTtwo(
+#' item1 = c("first place", "second place", "1", "seconddd", "meh"),
+#' item2 = c("7", "eightt", "seven", NA, "8"),
+#' item3 = c("emily", "i think emily", "JUNEE", "maybe june", "the name is emily"),
+#' item4 = c("nothing", "27 sqmt", "0", "it's empty", "i suck at math"),
+#' codingscheme = "sum")$crt_sum
 #' @export
 
 CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
@@ -24,8 +35,8 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder1 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bsecond\\b|\\b2\\b|\\btwo\\b|\\bsecondplace\\b"
-    regex.impulsivo <- "\\bfirst\\b|\\b1\\b|\\bone\\b|\\btop\\b|\\bwin\\b|\\bbest\\b"
+    regex.corretto <- "second|two|2"
+    regex.impulsivo <- "first|one|win|1"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -43,8 +54,8 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder2 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\beight\\b|\\b8(\\.0+)?\\b"
-    regex.impulsivo <- "\\bseven\\b|\\b7(\\.0+)?\\b"
+    regex.corretto <- "eight|8"
+    regex.impulsivo <- "seven|7"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -62,8 +73,8 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder3 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\bjune\\b"
-    regex.impulsivo <- "\\bemily\\b"
+    regex.corretto <- "emily"
+    regex.impulsivo <- "june"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -81,8 +92,8 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder4 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "\\b0\\b|\\bzero\\b|\\bnone\\b|\\bempty\\b|\\bnothing\\b"
-    regex.impulsivo <- "(?<!\\d)(?!0+(?:\\.0+)?\\b)(\\d+|zero)(\\.\\d+)?(\\s*(cm3|m3|metri cubi|mq|cm|metri|m|cubi))?|\\d+\\^\\d+|\\,\\d+|\\.\\d+"
+    regex.corretto <- "0|zero|nothing|not|empty|doesnt|any"
+    regex.impulsivo <- "^(?!.*\\b(0|zero|nothing|not|empty|doesnt|any)\\b).*\\d+.*"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
