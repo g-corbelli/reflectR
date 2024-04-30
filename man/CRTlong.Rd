@@ -2,7 +2,7 @@
 % Please edit documentation in R/CRTlong.R
 \name{CRTlong}
 \alias{CRTlong}
-\title{Automatic coding for Cognitive Reflection Test LONG open-ended responses}
+\title{Automatic coding for Cognitive Reflection Test LONG (Primi et al., 2016) open-ended responses}
 \usage{
 CRTlong(
   item1 = NULL,
@@ -27,7 +27,7 @@ CRTlong(
 
 \item{item6}{Vector of responses to the sixth CRT question, or NULL if not provided.}
 
-\item{codingscheme}{A character string indicating the desired coding scheme. Options are "categorical" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categorical".}
+\item{codingscheme}{A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".}
 }
 \value{
 A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
@@ -35,12 +35,27 @@ A list containing the coded and, if applicable, binary-coded responses for each 
 \description{
 Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
 }
+\note{
+Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
+}
 \examples{
-reflectR::CRTtwo(
-  item1 = c("al primo", "secondo", "1"),
-  item2 = c("7", "otto", "sette"),
-  item3 = c("primo", "carlo", "si chiama primo"),
-  item4 = c("nulla", "27 metri cubi", "zero"),
-  codingscheme = "mean"
-)
+# Automated scoring for CRTlong responses using the categorical coding scheme:
+reflectR::CRTlong(
+item1 = c("five", "5 cents", "10"),
+item2 = c("5", "one hundred", "100"),
+item3 = c("47", "24", "forty seven"),
+item4 = c("3 elves", "dunno", "six"),
+item5 = c("29", "thirty", "30"),
+item6 = c("15", "fifteen", "0"),
+codingscheme = "categ")
+
+# Compute the sum score for CRTlong responses based on binary-coded correctness:
+reflectR::CRTlong(
+item1 = c("five", "5 cents", "10"),
+item2 = c("5", "one hundred", "100"),
+item3 = c("47", "24", "forty seven"),
+item4 = c("3 elves", "dunno", "six"),
+item5 = c("29", "thirty", "30"),
+item6 = c("15", "fifteen", "0"),
+codingscheme = "sum")$crt_sum
 }

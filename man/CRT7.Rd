@@ -2,7 +2,7 @@
 % Please edit documentation in R/CRT7.R
 \name{CRT7}
 \alias{CRT7}
-\title{Automatic coding for Cognitive Reflection Test 7-item expanded version, open-ended responses}
+\title{Automatic coding for Cognitive Reflection Test 7-item expanded version (Toplak et al., 2014) open-ended responses}
 \usage{
 CRT7(
   item1 = NULL,
@@ -30,7 +30,7 @@ CRT7(
 
 \item{item7}{Vector of responses to the seventh CRT question, or NULL if not provided.}
 
-\item{codingscheme}{A character string indicating the desired coding scheme. Options are "categorical" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categorical".}
+\item{codingscheme}{A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".}
 }
 \value{
 A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
@@ -38,12 +38,29 @@ A list containing the coded and, if applicable, binary-coded responses for each 
 \description{
 Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
 }
+\note{
+Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
+}
 \examples{
-reflectR::CRTtwo(
-  item1 = c("al primo", "secondo", "1"),
-  item2 = c("7", "otto", "sette"),
-  item3 = c("primo", "carlo", "si chiama primo"),
-  item4 = c("nulla", "27 metri cubi", "zero"),
-  codingscheme = "mean"
-)
+# Automated scoring for CRT7 responses using the categorical coding scheme:
+reflectR::CRT7(
+item1 = c("five", "5 cents", "10"),
+item2 = c("5", "one hundred", "100"),
+item3 = c("47", "24", "forty seven"),
+item4 = c("four", "nineeee", "maybe 4?"),
+item5 = c("29", "thirty", "30"),
+item6 = c("twentyyyy", "ten I think", "dunno"),
+item7 = c("your behind", "poorer", "richer"),
+codingscheme = "categ")
+
+# Compute the sum score for CRT7 responses based on binary-coded correctness:
+reflectR::CRT7(
+item1 = c("five", "5 cents", "10"),
+item2 = c("5", "one hundred", "100"),
+item3 = c("47", "24", "forty seven"),
+item4 = c("four", "nineeee", "maybe 4?"),
+item5 = c("29", "thirty", "30"),
+item6 = c("twentyyyy", "ten I think", "dunno"),
+item7 = c("your behind", "poorer", "richer"),
+codingscheme = "sum")$crt_sum
 }

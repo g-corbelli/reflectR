@@ -2,7 +2,7 @@
 % Please edit documentation in R/CRTtwo.R
 \name{CRTtwo}
 \alias{CRTtwo}
-\title{Automatic coding for Cognitive Reflection Test 2 open-ended responses}
+\title{Automatic coding for Cognitive Reflection Test 2 (Thomson & Oppenheimer, 2016) open-ended responses}
 \usage{
 CRTtwo(
   item1 = NULL,
@@ -21,7 +21,7 @@ CRTtwo(
 
 \item{item4}{Vector of responses to the fourth CRT question, or NULL if not provided.}
 
-\item{codingscheme}{A character string indicating the desired coding scheme. Options are "categorical" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categorical".}
+\item{codingscheme}{A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".}
 }
 \value{
 A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
@@ -29,12 +29,23 @@ A list containing the coded and, if applicable, binary-coded responses for each 
 \description{
 Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
 }
+\note{
+Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
+}
 \examples{
+# Automated scoring for CRTtwo responses using the categorical coding scheme:
 reflectR::CRTtwo(
-  item1 = c("al primo", "secondo", "1"),
-  item2 = c("7", "otto", "sette"),
-  item3 = c("primo", "carlo", "si chiama primo"),
-  item4 = c("nulla", "27 metri cubi", "zero"),
-  codingscheme = "mean"
-)
+item1 = c("first place", "second place", "1", "seconddd", "meh"),
+item2 = c("7", "eightt", "seven", NA, "8"),
+item3 = c("emily", "i think emily", "JUNEE", "maybe june", "the name is emily"),
+item4 = c("nothing", "27 sqmt", "0", "it's empty", "i suck at math"),
+codingscheme = "categ")
+
+# Compute the sum score for CRTtwo responses based on binary-coded correctness:
+reflectR::CRTtwo(
+item1 = c("first place", "second place", "1", "seconddd", "meh"),
+item2 = c("7", "eightt", "seven", NA, "8"),
+item3 = c("emily", "i think emily", "JUNEE", "maybe june", "the name is emily"),
+item4 = c("nothing", "27 sqmt", "0", "it's empty", "i suck at math"),
+codingscheme = "sum")$crt_sum
 }
