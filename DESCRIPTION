@@ -1,6 +1,6 @@
 Package: reflectR
 Type: Package
-Title: reflectR: Automatic Scoring of the Cognitive Reflection Test
+Title: Automatic Scoring of the Cognitive Reflection Test
 Version: 2.0.0
 Imports:
     stringr
