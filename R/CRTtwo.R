@@ -92,8 +92,8 @@ CRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder4 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.corretto <- "0|zero|nothing|not|empty|doesnt|any"
-    regex.impulsivo <- "^(?!.*\\b(0|zero|nothing|not|empty|doesnt|any)\\b).*\\d+.*"
+    regex.corretto <- "0|zero|nothing|not|empty|doesnt|any|none|no|air|void"
+    regex.impulsivo <- "^(?!.*\\b(0|zero|nothing|not|empty|doesnt|any|none|no|air|void)\\b).*\\d+.*"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {

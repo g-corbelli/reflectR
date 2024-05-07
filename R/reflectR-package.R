@@ -1,10 +1,12 @@
 #' Automatic Scoring of the Cognitive Reflection Test
 #'
 #' The reflectR package provides automated coding tools for open-ended responses
-#' to various forms of the Cognitive Reflection Test (CRT). This package aims to
-#' standardize the analysis of CRT responses across broad datasets in cognitive
-#' psychology, decision-making, and related fields, thereby reducing manual effort
-#' and the variability in interpretation of responses.
+#' to various forms of the Cognitive Reflection Test (CRT). This package facilitates
+#' the standardization of Cognitive Reflection Test responses analysis across
+#' large datasets in cognitive psychology, decision-making, and related fields.
+#' By automating the coding process, it not only reduces manual effort but also
+#' aims to reduce the variability introduced by subjective interpretation of
+#' open-ended responses, contributing to a more consistent and reliable analysis.
 #'
 #' The package includes functions to code responses from:
 #' \itemize{
@@ -22,21 +24,20 @@
 #' the original authors of these tests.
 #'
 #' @section Acknowledgments:
-#' Development of this package was significantly enhanced by insights and suggestions
-#' from Dr. Keela Thomson.
+#' The development of this package benefited significantly from the kind insight
+#' and suggestion provided by Dr. Keela Thomson, whose contribution is gratefully
+#' acknowledged.
 #' Special thanks are also due to Dr. Paolo Giovanni Cicirelli,
-#' Prof. Marinella Paciello, Dr. Carmela Sportelli, and Prof. Francesca D'Errico
-#' for their contributions to the conceptualization and relevance of this tool in
-#' the research domains of personality, social, and cognitive psychology.
+#' Prof. Marinella Paciello, Dr. Carmela Sportelli, and Prof. Francesca D'Errico.
 #'
 #' @references
-#' Frederick, S. (2005). Cognitive Reflection and Decision Making. \emph{Journal of Economic Perspectives}, 19(4), 25-42.
+#' Frederick, S. (2005). Cognitive Reflection and Decision Making. \emph{Journal of Economic Perspectives}, 19(4), 25-42. doi:10.1257/089533005775196732
 #'
-#' Toplak, M. E., West, R. F., & Stanovich, K. E. (2014). Assessing miserly information processing: An expansion of the Cognitive Reflection Test. \emph{Thinking & Reasoning}, 20(2), 147-168.
+#' Toplak, M. E., West, R. F., & Stanovich, K. E. (2014). Assessing miserly information processing: An expansion of the Cognitive Reflection Test. \emph{Thinking & Reasoning}, 20(2), 147-168. doi:10.1080/13546783.2013.844729
 #'
-#' Primi, C., Morsanyi, K., Chiesi, F., Donati, M. A., & Hamilton, J. (2016). The development and testing of a new version of the Cognitive Reflection Test applying item response theory (IRT). \emph{Journal of Behavioral Decision Making}, 29(5), 453-469.
+#' Primi, C., Morsanyi, K., Chiesi, F., Donati, M. A., & Hamilton, J. (2016). The development and testing of a new version of the Cognitive Reflection Test applying item response theory (IRT). \emph{Journal of Behavioral Decision Making}, 29(5), 453-469. doi:10.1002/bdm.1883
 #'
-#' Thomson, K. S., & Oppenheimer, D. M. (2016). Investigating an alternate form of the cognitive reflection test. \emph{Judgment and Decision Making}, 11(1), 99-113.
+#' Thomson, K. S., & Oppenheimer, D. M. (2016). Investigating an alternate form of the cognitive reflection test. \emph{Judgment and Decision Making}, 11(1), 99-113. doi:10.1017/s1930297500007622
 #'
 #' @docType package
 #' @name reflectR

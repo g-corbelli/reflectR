@@ -36,7 +36,7 @@ itaCRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
   CRTcoder1 <- function(risposta) {
     risposta <- tolower(risposta)
     regex.impulsivo <- "prim|1|uno|testa"
-    regex.corretto <- "secondo|2|due"
+    regex.corretto <- "second|2|due"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
@@ -92,8 +92,8 @@ itaCRTtwo <- function(item1 = NULL, item2 = NULL, item3 = NULL, item4 = NULL,
 
   CRTcoder4 <- function(risposta) {
     risposta <- tolower(risposta)
-    regex.impulsivo <- "cm3|m3|metri cubi|mq|cm|metri|m|cubi"
-    regex.corretto <- "0|zero|niente|nulla|vuot"
+    regex.impulsivo <- "\\b[1-9]\\d*(\\.\\d+)?\\b|\\b0\\.\\d+\\b"
+    regex.corretto <- "zero|niente|nulla|vuot\\b|\\b0\\b"
     result <- integer(length(risposta))
     for (i in seq_along(risposta)) {
       if (is.na(risposta[i])) {
