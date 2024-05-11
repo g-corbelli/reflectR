@@ -12,7 +12,8 @@ CRT7(
   item5 = NULL,
   item6 = NULL,
   item7 = NULL,
-  codingscheme = "categ"
+  codingscheme = "categ",
+  na.rm = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ CRT7(
 \item{item7}{Vector of responses to the seventh CRT question, or NULL if not provided.}
 
 \item{codingscheme}{A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".}
+
+\item{na.rm}{Logical, indicating whether to treat missing values as empty responses or preserve them as missing information. When TRUE, NAs are coded as "other" incorrect responses; when FALSE, NAs are preserved. Default is TRUE.}
 }
 \value{
 A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
@@ -39,7 +42,7 @@ A list containing the coded and, if applicable, binary-coded responses for each 
 Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
 }
 \note{
-Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
+Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net, giuseppe.corbelli@uniroma1.it
 }
 \examples{
 # Automated scoring for CRT7 responses using the categorical coding scheme:
@@ -49,9 +52,10 @@ item2 = c("5", "one hundred", "100"),
 item3 = c("47", "24", "forty seven"),
 item4 = c("four", "nineeee", "maybe 4?"),
 item5 = c("29", "thirty", "30"),
-item6 = c("twentyyyy", "ten I think", "dunno"),
+item6 = c("twentyyyy", "ten I think", NA),
 item7 = c("your behind", "poorer", "richer"),
-codingscheme = "categ")
+codingscheme = "categ",
+na.rm = TRUE)
 
 # Compute the sum score for CRT7 responses based on binary-coded correctness:
 reflectR::CRT7(
@@ -60,7 +64,8 @@ item2 = c("5", "one hundred", "100"),
 item3 = c("47", "24", "forty seven"),
 item4 = c("four", "nineeee", "maybe 4?"),
 item5 = c("29", "thirty", "30"),
-item6 = c("twentyyyy", "ten I think", "dunno"),
+item6 = c("twentyyyy", "ten I think", NA),
 item7 = c("your behind", "poorer", "richer"),
-codingscheme = "sum")$crt_sum
+codingscheme = "sum",
+na.rm = FALSE)$crt_sum
 }

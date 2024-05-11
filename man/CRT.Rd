@@ -4,7 +4,13 @@
 \alias{CRT}
 \title{Automatic coding for Cognitive Reflection Test (Frederick, 2005) open-ended responses}
 \usage{
-CRT(item1 = NULL, item2 = NULL, item3 = NULL, codingscheme = "categ")
+CRT(
+  item1 = NULL,
+  item2 = NULL,
+  item3 = NULL,
+  codingscheme = "categ",
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{item1}{Vector of responses to the first CRT question, or NULL if not provided.}
@@ -14,6 +20,8 @@ CRT(item1 = NULL, item2 = NULL, item3 = NULL, codingscheme = "categ")
 \item{item3}{Vector of responses to the third CRT question, or NULL if not provided.}
 
 \item{codingscheme}{A character string indicating the desired coding scheme. Options are "categ" for the original 1, 2, 3 coding, "sum" for a sum of binary-coded correct answers, or "mean" for an average of binary-coded correct answers. The default is "categ".}
+
+\item{na.rm}{Logical, indicating whether to treat missing values as empty responses or preserve them as missing information. When TRUE, NAs are coded as "other" incorrect responses; when FALSE, NAs are preserved. Default is TRUE.}
 }
 \value{
 A list containing the coded and, if applicable, binary-coded responses for each provided CRT question. For "sum" or "mean" coding schemes, additional vectors representing these aggregate scores are included.
@@ -22,7 +30,7 @@ A list containing the coded and, if applicable, binary-coded responses for each 
 Applies coding logic to any number of provided CRT question responses and supports multiple coding schemes. This function can output original coded responses, binary-coded responses, and aggregate scores based on these binary codings.
 }
 \note{
-Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net
+Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.net, giuseppe.corbelli@uniroma1.it
 }
 \examples{
 # Automated scoring for CRT responses using the categorical coding scheme:
@@ -30,12 +38,14 @@ reflectR::CRT(
 item1 = c("meh", "five", "10", "ten"),
 item2 = c("5", "one hundred", "100", "five"),
 item3 = c("47", "24", "forty-sevenn", "who knows"),
-codingscheme = "categ")
+codingscheme = "categ",
+na.rm = TRUE)
 
 # Compute the sum score for CRT responses based on binary-coded correctness:
 reflectR::CRT(
 item1 = c("meh", "five", "10", "ten"),
 item2 = c("5", "one hundred", "100", "five"),
 item3 = c("47", "24", "forty-sevenn", "booo"),
-codingscheme = "sum")$crt_sum
+codingscheme = "sum",
+na.rm = FALSE)$crt_sum
 }
