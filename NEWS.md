@@ -1,5 +1,13 @@
 # reflectR NEWS
 
+## Version 2.1.3
+
+### Enhancements
+- Added the 'na.rm' parameter to all functions for flexible handling of missing data. 
+
+### Documentation Updates
+- Updated email contact information in the function documentation.
+
 ## Version 2.1.2
 
 ### Enhancements
