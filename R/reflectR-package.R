@@ -29,6 +29,9 @@
 #' acknowledged.
 #' Special thanks are also due to Dr. Paolo Giovanni Cicirelli,
 #' Prof. Marinella Paciello, Dr. Carmela Sportelli, and Prof. Francesca D'Errico.
+#' Acknowledgment is also due to the European project STERHEOTYPES for funding
+#' the data collection that produced the datasets initially used for manual
+#' multi-rater coding of CRT-2 items.
 #'
 #' @references
 #' Frederick, S. (2005). Cognitive Reflection and Decision Making. \emph{Journal of Economic Perspectives}, 19(4), 25-42. doi:10.1257/089533005775196732
